@@ -4,6 +4,7 @@ import statistics
 
 # Specify the file to read from
 csvpath = os.path.join("Resources", "budget_data.csv")
+print (csvpath)
 
 # Initialise the following to 0 to calculate 
 monthcount = 0  # of months
@@ -39,27 +40,23 @@ maxchangemonth = months[changes.index(maxchange)]
 minchange = min(changes)
 minchangemonth = months[changes.index(minchange)]
 
+
+# Create the result
+output = ("Financial Analysis\n----------------------------\nTotal Months: "
++str(monthcount) +"\nTotal: $" + str(total) + "\nAverage Changes: $"+str(average) +
+"\nGreatest Increase in Profits: "+ maxchangemonth +" ($" + str(maxchange)+")\n" +
+"Greatest Decrease in Profits: " + minchangemonth +" ($" + str(minchange)+")")
+
 # Print the result
-print ("Financial Analysis\n----------------------------\nTotal Months: "+ str(monthcount) +
-        "\nTotal: $" + str(total) + "\nAverage Changes: $"+str(average) +"\nGreatest Increase in Profits: "+ maxchangemonth +
-        " ($" + str(maxchange)+")\n" + "Greatest Decrease in Profits: " + minchangemonth +
-        " ($" + str(minchange)+")")
+
+print (output)
 
  # Specify the file to write to
-output_path = os.path.join("analysis", "financial_analysis.csv")
+output_path = os.path.join("analysis", "financial_analysis.txt")
 
-# Open the file using "write" mode. Specify the variable to hold the contents
-with open(output_path, 'w') as csvfile:
+# Open the file using "write" mode.
+with open(output_path, 'w') as file:
 
-    # Initialize csv.writer
-    csvwriter = csv.writer(csvfile, delimiter=',')
-
-    # Write the first row (column headers)
-    csvwriter.writerow(['Total Months', 'Total', 'Average Change','Greatest Increase in Profits','Greatest Decrease in Profits'])
-
-    # Write the second row
-    csvwriter.writerow([monthcount,"$" + str(total),"$" + str(average),maxchangemonth +
-        " ($" + str(maxchange)+")",minchangemonth +" ($" + str(minchange)+")"])
-
-
+    # Write the results to the txt file
+    file.write(output)
  
